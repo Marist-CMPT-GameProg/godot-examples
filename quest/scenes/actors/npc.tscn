@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3mtrcm4q85u3"]
+
+[ext_resource type="Script" path="res://scripts/actors/NPC.gd" id="1_ensvc"]
+[ext_resource type="Texture2D" uid="uid://c3l65hcpyuqf7" path="res://art/characters/npc.png" id="2_vfasu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2os78"]
+radius = 8.0
+
+[node name="NPC" type="Area2D" groups=["npc"]]
+script = ExtResource("1_ensvc")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_vfasu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2os78")

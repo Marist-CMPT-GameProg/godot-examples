@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjsu1g7wds7nt"]
+
+[ext_resource type="Script" path="res://scripts/ui/Hud.gd" id="1_11kum"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_11kum")
+
+[node name="CurrentRegion" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.5
+offset_top = -33.0
+offset_right = 50.5
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Region: none"
+
+[node name="GoldCounter" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.5
+offset_top = 10.0
+offset_right = 50.5
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "Gold: 0"
+
+[node name="ItemCounter" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 111.0
+offset_bottom = 33.0
+text = "Collected: 0"
+
+[node name="KillCounter" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -111.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 33.0
+grow_horizontal = 0
+text = "Slain: 0"

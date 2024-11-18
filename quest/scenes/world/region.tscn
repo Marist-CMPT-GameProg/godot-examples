@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1q6lt0ji0jir"]
+
+[ext_resource type="Script" path="res://scripts/world/Region.gd" id="1_3l5i1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tv6p"]
+
+[node name="Region" type="Area2D" groups=["region"]]
+scale = Vector2(20, 10)
+script = ExtResource("1_3l5i1")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4tv6p")

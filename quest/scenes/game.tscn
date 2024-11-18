@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://cgsim40snqioj"]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_qk53t"]
+[ext_resource type="PackedScene" uid="uid://blng1qlg8jtpa" path="res://scenes/actors/hero.tscn" id="2_3i36v"]
+[ext_resource type="PackedScene" uid="uid://bjsu1g7wds7nt" path="res://scenes/ui/hud.tscn" id="2_rh3yi"]
+[ext_resource type="PackedScene" uid="uid://q3eb5x67dn8n" path="res://scenes/ui/quest_journal.tscn" id="3_4ivvd"]
+[ext_resource type="PackedScene" uid="uid://d1q6lt0ji0jir" path="res://scenes/world/region.tscn" id="3_rtoij"]
+[ext_resource type="PackedScene" uid="uid://dmoit5js45aap" path="res://scenes/objects/item.tscn" id="4_ll62f"]
+[ext_resource type="PackedScene" uid="uid://dsjxh643xgvbv" path="res://scenes/actors/enemy.tscn" id="5_s2rv2"]
+[ext_resource type="Script" path="res://scripts/systems/quest/ExploreQuest.gd" id="8_7od7r"]
+[ext_resource type="PackedScene" uid="uid://d3mtrcm4q85u3" path="res://scenes/actors/npc.tscn" id="8_ybmmd"]
+
+[sub_resource type="Resource" id="Resource_kbvaf"]
+script = ExtResource("8_7od7r")
+places = Array[String](["Caverns of Doom"])
+name = "Find the Caverns of Doom"
+reward = 50
+status = 0
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_qk53t")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UI" instance=ExtResource("2_rh3yi")]
+
+[node name="QuestJournal" parent="UI" node_paths=PackedStringArray("hero") instance=ExtResource("3_4ivvd")]
+hero = NodePath("../../World/Hero")
+colors = Array[Color]([Color(0.596078, 0.596078, 0.596078, 1), Color(0.788235, 0.639216, 0.490196, 1), Color(0.788235, 0.639216, 0.490196, 1), Color(0.4, 0.4, 0.4, 1)])
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Hero" parent="World" instance=ExtResource("2_3i36v")]
+
+[node name="Darklands" parent="World" instance=ExtResource("3_rtoij")]
+position = Vector2(331, 116)
+
+[node name="Key" parent="World/Darklands" instance=ExtResource("4_ll62f")]
+position = Vector2(3.3, -4.3)
+scale = Vector2(0.05, 0.1)
+
+[node name="Goblin Thug" parent="World/Darklands" instance=ExtResource("5_s2rv2")]
+position = Vector2(5.8, 2.6)
+scale = Vector2(0.05, 0.1)
+
+[node name="Goblin Brute" parent="World/Darklands" instance=ExtResource("5_s2rv2")]
+position = Vector2(0.55, -2.8)
+scale = Vector2(0.05, 0.1)
+
+[node name="Ugly Brigand" parent="World/Darklands" instance=ExtResource("5_s2rv2")]
+position = Vector2(-6.7, 0.7)
+scale = Vector2(0.05, 0.1)
+
+[node name="Angry Brigand" parent="World/Darklands" instance=ExtResource("5_s2rv2")]
+position = Vector2(-7.8, 4.6)
+scale = Vector2(0.05, 0.1)
+
+[node name="Citadel of Light" parent="World" instance=ExtResource("3_rtoij")]
+position = Vector2(143, 483)
+scale = Vector2(10, 10)
+
+[node name="Shalandra" parent="World/Citadel of Light" instance=ExtResource("8_ybmmd")]
+position = Vector2(-5, 5)
+scale = Vector2(0.1, 0.1)
+quest = SubResource("Resource_kbvaf")
+
+[node name="Forsaken Vale" parent="World" instance=ExtResource("3_rtoij")]
+position = Vector2(579, 439)
+scale = Vector2(20, 20)
+
+[node name="Shield of Valor" parent="World/Forsaken Vale" instance=ExtResource("4_ll62f")]
+position = Vector2(2, 3)
+scale = Vector2(0.05, 0.05)
+
+[node name="Ogre" parent="World/Forsaken Vale" instance=ExtResource("5_s2rv2")]
+position = Vector2(-0.75, -1.05)
+scale = Vector2(0.05, 0.05)
+
+[node name="Caverns of Doom" parent="World" instance=ExtResource("3_rtoij")]
+position = Vector2(951, 254)
+scale = Vector2(10, 15)
+
+[node name="Amulet" parent="World/Caverns of Doom" instance=ExtResource("4_ll62f")]
+position = Vector2(5.4, -5.2)
+scale = Vector2(0.1, 0.0666667)
+
+[node name="Dragon" parent="World/Caverns of Doom" instance=ExtResource("5_s2rv2")]
+position = Vector2(0.800002, -2.33333)
+scale = Vector2(0.1, 0.0666667)
+
+[connection signal="enemy_slain" from="World/Hero" to="UI/HUD" method="_on_hero_enemy_slain"]
+[connection signal="gold_changed" from="World/Hero" to="UI/HUD" method="_on_hero_gold_changed"]
+[connection signal="item_collected" from="World/Hero" to="UI/HUD" method="_on_hero_item_collected"]
+[connection signal="area_entered" from="World/Citadel of Light/Shalandra" to="World/Citadel of Light/Shalandra" method="_on_area_entered"]
