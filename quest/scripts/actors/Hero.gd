@@ -9,6 +9,9 @@ signal enemy_slain(count: int)
 ## Indicates when an item has been collected by the player.
 signal item_collected(count: int)
 
+## Hero subscribes to event notifications from the quest channel
+var _quest_channel: QuestChannel = QuestChannel.get_instance()
+
 ## How much gold the hero currently has.
 var gold:int = 0:
 	set(amount):
@@ -37,7 +40,7 @@ func _input(event):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	_quest_channel.quest_rewarded.connect(_on_quest_rewarded)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,6 +51,8 @@ func _process(_delta):
 func _on_area_entered(area: Area2D):
 	if area.is_in_group("region"):
 		(area as Region).enter(self)
+	elif area.is_in_group("npc"):
+		(area as NPC).talk(self)
 	elif area.is_in_group("item"):
 		item_count += 1
 		item_collected.emit(item_count)
@@ -62,3 +67,6 @@ func _on_area_exited(area: Area2D):
 	if area.is_in_group("region"):
 		(area as Region).exit(self)
 
+
+func _on_quest_rewarded(quest: Quest):
+	gold += quest.reward

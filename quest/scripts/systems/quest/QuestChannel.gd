@@ -22,4 +22,39 @@ extends Object
 ## @tutorial(Observer pattern): https://refactoring.guru/design-patterns/observer
 ## @tutorial(Mediator pattern): https://refactoring.guru/design-patterns/mediator
 
-# TODO Implement this channel by loosely following the design idea at https://betterprogramming.pub/implementing-a-scalable-quest-system-7f36ea4cfe22
+
+## Indicates that a quest has been accepted.
+## Payload is the [param quest] that emitted the signal.
+@warning_ignore("unused_signal")
+signal quest_accepted(quest:Quest)
+
+## Indicates that a quest's objectives have been completed.
+## Payload is the [param quest] that emitted the signal.
+@warning_ignore("unused_signal")
+signal quest_completed(quest:Quest)
+
+## Indicates that a quest has been rewarded and closed.
+## Payload is the [param quest] that emitted the signal.
+@warning_ignore("unused_signal")
+signal quest_rewarded(quest:Quest)
+
+## Indicates that a quest has been unlocked.
+## Payload is the [param quest] that emitted the signal.
+@warning_ignore("unused_signal")
+signal quest_unlocked(quest:Quest)
+
+
+# Calling this constructor more than once is an error.
+func _init():
+	assert(_instance == null)
+
+
+## Returns the one unique [member _instance] of this channel, instantating it the first time.
+static func get_instance() -> QuestChannel:
+	if not _instance:
+		_instance = QuestChannel.new()
+	return _instance
+
+
+## The single globally-acessible instance of this channel.
+static var _instance: QuestChannel = null

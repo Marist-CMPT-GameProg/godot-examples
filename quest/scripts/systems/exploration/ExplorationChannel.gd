@@ -24,10 +24,12 @@ extends Object
 
 ## Indicates that a given region has been explored.
 ## Payload is the [param region] that emitted the signal.
+@warning_ignore("unused_signal")
 signal region_entered(region:Region)
 
 ## Indicates that a given region has been left.
 ## Payload is the [param region] that emitted the signal.
+@warning_ignore("unused_signal")
 signal region_exited(region:Region)
 
 

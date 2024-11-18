@@ -25,7 +25,7 @@ func _on_region_entered(region: Node2D):
 	print("Location entered!")
 
 
-func _on_region_exited(region: Node2D):
+func _on_region_exited(_region: Node2D):
 	$CurrentRegion.text = "Region: none"
 	print("Location exited!")
 

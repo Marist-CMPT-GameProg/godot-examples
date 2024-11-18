@@ -1,13 +1,25 @@
 class_name NPC
 extends Area2D
+## A simple non-player character that can bestow a quest.
 
-# TODO Assign this NPC a quest that it can provide
+## The quest offered by this character.
+@export var quest:Quest
 
-# TODO Add a talk method so the player can interact to accept and turn-in the quest
+
+## Interacting with this NPC unlocks, accepts, or turns-in their associated quest.
+func talk(_hero:Hero):
+	match quest.status:
+		Quest.Status.PENDING:
+			quest._unlock()
+		Quest.Status.UNLOCKED:
+			quest._accept()
+		Quest.Status.COMPLETE:
+			quest._reward()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	quest.ready()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
