@@ -19,29 +19,36 @@ var tile_size:int
 ## to the source and it is not an obstacle, then assign a cost of 1, otherwise
 ## assign it an infinite cost (see built-in INF constant).
 func cost(src:Vector2i, dst:Vector2i):
-	# TODO  Fill in the implementation of this function.
-	pass
+	if cells[size.x * dst.y + dst.x]:
+		return INF
+	elif (dst - src).length_squared() != 1:
+		return INF
+	else:
+		return 1
 
 
 ## Creates a 2D array that represents a discrete world.
 ## We build this programmatically from the TileMapLayer so that it is easy to
 ## design the world in the Godot editor by simply placing tiles appropriately.
 func initialize_grid():
-	# TODO Fill in the implementation of this function.
-	#	Resize and initialize the elements of the `cells` 2D-array.
-	#	Each cell should be a Boolean value indicating obstacle (True) or not.
-	#	Look up `get_cell_source_id` in the documentation for TileMapLayer
-	#	and use this function to determine whether an obstacle is present.
-	pass
+	cells.resize(size.x * size.y)
+	for dx in range(0, size.x):
+		for dy in range(0, size.y):
+			cells[size.x * dy + dx] = obstacles.get_cell_source_id(Vector2i(dx, dy)) != -1
 
 ## Returns the coordinates of the immediate neighbors for the specified cell.
 func neighbors(cell:Vector2i):
 	var ns = []
-	# TODO Fill the ns array with the coordinates of the 2-4 adjacent cells.
-	#	Remember that edges and corners will not have neighbors on all sides.
-	#	You may treat obstacles as neighbors with infinite cost to reach, or
-	#	simply ignore them and don't treat them as neighbors.
+	if cell.x > 0: # and cells[size.x * cell.y + cell.x - 1] == false:
+		ns.append(Vector2i(cell.x - 1, cell.y))
+	if cell.x < size.x - 1: # and cells[size.x * cell.y + cell.x + 1] == false:
+		ns.append(Vector2i(cell.x + 1, cell.y))
+	if cell.y > 0: # and cells[size.x * (cell.y - 1) + cell.x] == false:
+		ns.append(Vector2i(cell.x, cell.y - 1))
+	if cell.y < size.y - 1: # and cells[size.x * (cell.y + 1) + cell.x] == false:
+		ns.append(Vector2i(cell.x, cell.y + 1))
 	return ns
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
