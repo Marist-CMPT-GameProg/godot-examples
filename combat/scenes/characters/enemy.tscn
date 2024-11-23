@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://6lqhbbba3g12"]
+
+[ext_resource type="Script" path="res://scripts/characters/Enemy.gd" id="1_75057"]
+[ext_resource type="Texture2D" uid="uid://dfwb43fy3kn60" path="res://art/characters/buttonRound_brown.png" id="2_eewek"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jtioc"]
+radius = 240.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h46b4"]
+radius = 16.0
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+motion_mode = 1
+slide_on_ceiling = false
+script = ExtResource("1_75057")
+
+[node name="MeleeZone" type="Area2D" parent="."]
+
+[node name="Collider" type="CollisionShape2D" parent="MeleeZone"]
+shape = SubResource("CircleShape2D_jtioc")
+
+[node name="RangeZone" type="Area2D" parent="."]
+
+[node name="Collider" type="CollisionShape2D" parent="RangeZone"]
+shape = SubResource("CircleShape2D_jtioc")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_h46b4")
+
+[node name="AttackOrigin" type="Node2D" parent="."]
+position = Vector2(16, 0)
+
+[node name="Avatar" type="Sprite2D" parent="."]
+texture = ExtResource("2_eewek")
+region_rect = Rect2(0, 0, 16, 16)

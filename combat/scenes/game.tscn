@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cunp4yjby4evb"]
+
+[ext_resource type="PackedScene" uid="uid://cpvvg650xgi4n" path="res://scenes/characters/hero.tscn" id="1_xk2ob"]
+[ext_resource type="PackedScene" uid="uid://6lqhbbba3g12" path="res://scenes/characters/enemy.tscn" id="2_yyb62"]
+
+[node name="Game" type="Node"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Hero" parent="World" instance=ExtResource("1_xk2ob")]
+position = Vector2(568, 332)
+
+[node name="Enemy" parent="World" instance=ExtResource("2_yyb62")]
+position = Vector2(192, 443)
+
+[node name="Enemy2" parent="World" instance=ExtResource("2_yyb62")]
+position = Vector2(844, 127)
+
+[node name="Enemy3" parent="World" instance=ExtResource("2_yyb62")]
+position = Vector2(1000, 485)
+
+[node name="Enemy4" parent="World" instance=ExtResource("2_yyb62")]
+position = Vector2(242, 93)
+
+[node name="Enemy5" parent="World" instance=ExtResource("2_yyb62")]
+position = Vector2(975, 227)
+
+[node name="Enemy6" parent="World" instance=ExtResource("2_yyb62")]
+position = Vector2(423, 549)
+
+[node name="UI" type="CanvasLayer" parent="."]
