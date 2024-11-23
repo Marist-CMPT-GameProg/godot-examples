@@ -4,6 +4,7 @@ extends Area2D
 
 ## Indicates when the player has gained or lost gold.
 signal gold_changed(count: int)
+# TODO Move these signals into the appropriate channels
 ## Indicates when an enemy has been defeated by the player.
 signal enemy_slain(count: int)
 ## Indicates when an item has been collected by the player.
@@ -11,6 +12,7 @@ signal item_collected(count: int)
 
 ## Hero subscribes to event notifications from the quest channel
 var _quest_channel: QuestChannel = QuestChannel.get_instance()
+# TODO The hero must also be able to receive notifications from Combat and Inventory channels
 
 ## How much gold the hero currently has.
 var gold:int = 0:
@@ -55,11 +57,9 @@ func _on_area_entered(area: Area2D):
 		(area as NPC).talk(self)
 	elif area.is_in_group("item"):
 		item_count += 1
-		item_collected.emit(item_count)
 		area.queue_free()
 	elif area.is_in_group("enemy"):
 		kill_count += 1
-		enemy_slain.emit(kill_count)
 		area.queue_free()
 
 
