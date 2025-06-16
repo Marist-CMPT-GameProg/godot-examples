@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbqnn3uyagghk"]
+
+[ext_resource type="Script" uid="uid://c2e8f3v0ca4fy" path="res://prefabs/agent/interfaces/WorkingMemory.gd" id="1_4bw8b"]
+
+[node name="WorkingMemory" type="Node"]
+script = ExtResource("1_4bw8b")

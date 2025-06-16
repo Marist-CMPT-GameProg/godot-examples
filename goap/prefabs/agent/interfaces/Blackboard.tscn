@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://jtc41lyi36uv"]
+
+[ext_resource type="Script" uid="uid://b7qmgu6x8jp3k" path="res://prefabs/agent/interfaces/Blackboard.gd" id="1_xs2b2"]
+
+[node name="Blackboard" type="Node"]
+script = ExtResource("1_xs2b2")

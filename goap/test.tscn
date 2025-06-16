@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://blq7tpj3gvij4"]
+
+[ext_resource type="PackedScene" uid="uid://46uxwa75dfad" path="res://prefabs/agent/sensors/Vision.tscn" id="1_37kl0"]
+[ext_resource type="PackedScene" uid="uid://jtc41lyi36uv" path="res://prefabs/agent/interfaces/Blackboard.tscn" id="1_ppyta"]
+[ext_resource type="Texture2D" uid="uid://c5mhwvcuwu4k2" path="res://assets/sprites/towerDefense_tile249.png" id="1_ykrsh"]
+[ext_resource type="Script" uid="uid://npdhq37uvqc8" path="res://prefabs/agent/planner/SimpleBrain.gd" id="2_vbegm"]
+[ext_resource type="PackedScene" uid="uid://bbqnn3uyagghk" path="res://prefabs/agent/interfaces/WorkingMemory.tscn" id="2_ykrsh"]
+[ext_resource type="PackedScene" uid="uid://bgxrtnoa2q3de" path="res://prefabs/agent/subsystems/Rotator.tscn" id="3_g14j6"]
+[ext_resource type="Texture2D" uid="uid://00kwgo55vu5y" path="res://assets/sprites/towerDefense_tile181.png" id="6_g14j6"]
+[ext_resource type="Texture2D" uid="uid://c5fmcnf8ci7i3" path="res://assets/sprites/towerDefense_tile130.png" id="8_ehkex"]
+[ext_resource type="Script" uid="uid://cwj4rih328qgv" path="res://MouseFollow.gd" id="8_xersf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vbegm"]
+size = Vector2(50, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehkex"]
+size = Vector2(50, 50)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vbegm"]
+radius = 30.0
+
+[node name="Test" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Agent" type="Sprite2D" parent="."]
+texture = ExtResource("1_ykrsh")
+script = ExtResource("2_vbegm")
+
+[node name="Blackboard" parent="Agent" instance=ExtResource("1_ppyta")]
+
+[node name="WorkingMemory" parent="Agent" instance=ExtResource("2_ykrsh")]
+
+[node name="Rotator" parent="Agent" node_paths=PackedStringArray("subject", "blackboard") instance=ExtResource("3_g14j6")]
+subject = NodePath("..")
+blackboard = NodePath("../Blackboard")
+
+[node name="Vision" parent="Agent" node_paths=PackedStringArray("memory") instance=ExtResource("1_37kl0")]
+range = 500.0
+fov_degrees = 150.0
+scan_samples = 15
+scan_time = 0.25
+memory = NodePath("../WorkingMemory")
+
+[node name="Obstacle" type="StaticBody2D" parent="."]
+position = Vector2(192, -128)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacle"]
+texture = ExtResource("6_g14j6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle"]
+shape = SubResource("RectangleShape2D_vbegm")
+
+[node name="Obstacle2" type="StaticBody2D" parent="."]
+position = Vector2(256, 128)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacle2"]
+texture = ExtResource("6_g14j6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle2"]
+shape = SubResource("RectangleShape2D_ehkex")
+
+[node name="Obstacle3" type="StaticBody2D" parent="."]
+position = Vector2(320, 0)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacle3"]
+texture = ExtResource("6_g14j6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle3"]
+shape = SubResource("RectangleShape2D_ehkex")
+
+[node name="Obstacle4" type="StaticBody2D" parent="."]
+position = Vector2(128, 192)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacle4"]
+texture = ExtResource("6_g14j6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle4"]
+shape = SubResource("RectangleShape2D_ehkex")
+
+[node name="Obstacle5" type="StaticBody2D" parent="."]
+position = Vector2(128, -256)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacle5"]
+texture = ExtResource("6_g14j6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle5"]
+shape = SubResource("RectangleShape2D_ehkex")
+
+[node name="MovableObstacle" type="StaticBody2D" parent="." groups=["Target"]]
+position = Vector2(384, 256)
+script = ExtResource("8_xersf")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="MovableObstacle"]
+texture = ExtResource("8_ehkex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovableObstacle"]
+shape = SubResource("CircleShape2D_vbegm")

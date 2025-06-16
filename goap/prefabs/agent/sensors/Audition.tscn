@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqrx2o3jv7pjh"]
+
+[ext_resource type="Script" uid="uid://bsuydnleq4ycd" path="res://prefabs/agent/sensors/Audition.gd" id="1_0vt46"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0vt46"]
+
+[node name="Audition" type="Area2D"]
+script = ExtResource("1_0vt46")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0vt46")
