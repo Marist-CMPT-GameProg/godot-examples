@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cbtyesm3yd8m3"]
+
+[ext_resource type="Script" uid="uid://70ctbg2jy44t" path="res://scripts/Main.gd" id="1_8hhq5"]
+[ext_resource type="Script" uid="uid://dmmw71xbtetsy" path="res://scripts/Spot.gd" id="2_2kufq"]
+[ext_resource type="Script" uid="uid://bscbq1j5ul70j" path="res://scripts/Zone.gd" id="3_e74vs"]
+[ext_resource type="Script" uid="uid://b1bp38e2gnqxs" path="res://scripts/Boundary.gd" id="4_2geyc"]
+
+[node name="Test2D" type="Node2D" unique_id=521203653]
+script = ExtResource("1_8hhq5")
+
+[node name="Boundary" type="Node2D" parent="." unique_id=1886326360]
+script = ExtResource("4_2geyc")
+end = Vector2(1152, 648)
+width = 6.0
+
+[node name="Spot" type="Node2D" parent="." unique_id=360497935]
+script = ExtResource("2_2kufq")
+color = Color(1, 0, 0, 1)
+
+[node name="Zone1" type="Node2D" parent="." unique_id=1412931761]
+script = ExtResource("3_e74vs")
+center = Vector2(200, 120)
+radius = 40.0
+
+[node name="Zone2" type="Node2D" parent="." unique_id=997468569]
+script = ExtResource("3_e74vs")
+center = Vector2(900, 240)
+radius = 60.0
+
+[node name="Zone3" type="Node2D" parent="." unique_id=62683291]
+script = ExtResource("3_e74vs")
+center = Vector2(500, 450)
+radius = 120.0

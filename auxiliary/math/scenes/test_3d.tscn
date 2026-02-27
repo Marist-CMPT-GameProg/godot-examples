@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://b20thaqkumcvo"]
+
+[ext_resource type="Script" uid="uid://cudkkgypkatgc" path="res://scripts/Spot3D.gd" id="1_t1k08"]
+[ext_resource type="Script" uid="uid://70ctbg2jy44t" path="res://scripts/Main.gd" id="1_ucda5"]
+[ext_resource type="Script" uid="uid://bmwhjittlr67p" path="res://scripts/Zone3D.gd" id="2_y51pd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8eyd"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pvbvq"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.8784314)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yln5a"]
+material = SubResource("StandardMaterial3D_pvbvq")
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qe30s"]
+transparency = 1
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ndic3"]
+transparency = 1
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n34jb"]
+transparency = 1
+albedo_color = Color(0, 1, 1, 1)
+
+[node name="Test3D" type="Node3D" unique_id=1172955144]
+script = ExtResource("1_ucda5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=145196550]
+transform = Transform3D(0.683013, -0.258819, 0.683013, 0.183013, 0.965926, 0.183013, -0.707107, 1.4488e-08, 0.707107, 0, 0, 0)
+
+[node name="Spot3D" type="CSGSphere3D" parent="." unique_id=1033566641]
+material = SubResource("StandardMaterial3D_a8eyd")
+script = ExtResource("1_t1k08")
+
+[node name="Boundary" type="MeshInstance3D" parent="." unique_id=347574618]
+mesh = SubResource("PlaneMesh_yln5a")
+
+[node name="Zone3D1" type="CSGSphere3D" parent="." unique_id=872540013]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 3)
+radius = 4.0
+material = SubResource("StandardMaterial3D_qe30s")
+script = ExtResource("2_y51pd")
+
+[node name="Zone3D2" type="CSGSphere3D" parent="." unique_id=606537471]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -6)
+radius = 3.0
+material = SubResource("StandardMaterial3D_ndic3")
+script = ExtResource("2_y51pd")
+
+[node name="Zone3D3" type="CSGSphere3D" parent="." unique_id=1730560498]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -13)
+radius = 6.0
+material = SubResource("StandardMaterial3D_n34jb")
+script = ExtResource("2_y51pd")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=809673387]
+transform = Transform3D(0.707107, -0.241845, 0.664463, 0, 0.939693, 0.34202, -0.707107, -0.241845, 0.664463, 4, 5, 6)
