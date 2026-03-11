@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dgt3wfndid6qh"]
+
+[ext_resource type="Texture2D" path="res://art/Sprites/Tiles/Double/sign.png" id="1_0k0x6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7rvs0"]
+size = Vector2(128, 128)
+
+[node name="POI" type="Area2D" unique_id=1718234094]
+collision_layer = 2
+collision_mask = 4
+
+[node name="Detector" type="CollisionShape2D" parent="." unique_id=606887781]
+shape = SubResource("RectangleShape2D_7rvs0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=494734697]
+texture = ExtResource("1_0k0x6")

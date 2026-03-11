@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bjv0vpu3mx346"]
+
+[ext_resource type="PackedScene" uid="uid://dc60uyj3urfyq" path="res://levels/level_1.tscn" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://c5se6d2yf0e4t" path="res://levels/game.gd" id="1_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://hnorn43ttcqa" path="res://ui/hud.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://bpfdsbnsvyd0d" path="res://inventory/inventory.tscn" id="3_30w35"]
+[ext_resource type="PackedScene" uid="uid://b0c6u3evco8gt" path="res://inventory/inventory_ui.tscn" id="4_3dryh"]
+
+[node name="Game" type="Node" unique_id=1683102345 node_paths=PackedStringArray("inventory_ui")]
+script = ExtResource("1_wrm1d")
+inventory_ui = NodePath("InventoryLayer/InventoryUI")
+
+[node name="Level1" parent="." unique_id=1176352480 instance=ExtResource("1_ebmjs")]
+
+[node name="Inventory" parent="Level1/Characters/Player" parent_id_path=PackedInt32Array(1176352480, 1741144309) index="2" unique_id=976703153 instance=ExtResource("3_30w35")]
+
+[node name="HUD" parent="." unique_id=95440107 instance=ExtResource("2_qxrlw")]
+
+[node name="InventoryLayer" type="CanvasLayer" parent="." unique_id=155878190]
+
+[node name="InventoryUI" parent="InventoryLayer" unique_id=1643645883 node_paths=PackedStringArray("inventory") instance=ExtResource("4_3dryh")]
+process_mode = 2
+inventory = NodePath("../../Level1/Characters/Player/Inventory")
+
+[connection signal="collected" from="Level1/Characters/Player" to="HUD" method="_on_player_collected"]
+[connection signal="inventory_updated" from="Level1/Characters/Player/Inventory" to="InventoryLayer/InventoryUI" method="refresh_ui"]
+
+[editable path="Level1"]

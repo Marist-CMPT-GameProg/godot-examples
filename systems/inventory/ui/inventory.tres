@@ -1,0 +1,11 @@
+[gd_resource type="Theme" format=3 uid="uid://be15rtpmhrhx8"]
+
+[ext_resource type="Texture2D" uid="uid://cbkpulix3jy7k" path="res://art/PNG/panel_brown.png" id="1_n2gdk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eeed0"]
+texture = ExtResource("1_n2gdk")
+
+[resource]
+GridContainer/constants/h_separation = 4
+GridContainer/constants/v_separation = 4
+Panel/styles/panel = SubResource("StyleBoxTexture_eeed0")

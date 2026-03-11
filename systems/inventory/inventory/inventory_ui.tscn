@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b0c6u3evco8gt"]
+
+[ext_resource type="Script" uid="uid://gv8oj7t7qve2" path="res://inventory/inventory_ui.gd" id="1_hfbh7"]
+[ext_resource type="Theme" uid="uid://be15rtpmhrhx8" path="res://ui/inventory.tres" id="2_2hut1"]
+[ext_resource type="Theme" uid="uid://bkgfia1p4wd7d" path="res://ui/inventory_item.tres" id="3_cedrj"]
+
+[node name="InventoryUI" type="Control" unique_id=1284493174]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hfbh7")
+
+[node name="Panel" type="Panel" parent="." unique_id=676751926]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -240.0
+offset_right = 290.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_2hut1")
+
+[node name="Grid" type="GridContainer" parent="." unique_id=264049959]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_cedrj")
+columns = 5
