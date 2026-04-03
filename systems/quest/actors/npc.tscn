@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dyrcwu6rat1t2"]
+
+[ext_resource type="Script" uid="uid://boe2mvbotnsab" path="res://actors/npc.gd" id="1_louo0"]
+[ext_resource type="Texture2D" uid="uid://cwy5ed1id7p1w" path="res://art/Sprites/Enemies/Default/frog_idle.png" id="2_qbes0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjbk2"]
+size = Vector2(64, 64)
+
+[node name="Npc" type="Area2D" unique_id=18894243]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_louo0")
+metadata/_custom_type_script = "uid://boe2mvbotnsab"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2026943464]
+position = Vector2(0, -32)
+texture = ExtResource("2_qbes0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1881931607]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_yjbk2")
+
+[connection signal="body_entered" from="." to="." method="talk"]

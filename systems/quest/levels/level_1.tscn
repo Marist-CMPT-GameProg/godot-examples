@@ -1,0 +1,82 @@
+[gd_scene format=4 uid="uid://dc60uyj3urfyq"]
+
+[ext_resource type="PackedScene" uid="uid://dn70ks3vqhl7p" path="res://levels/tile_map_layer.tscn" id="1_8ffim"]
+[ext_resource type="Texture2D" uid="uid://6b6yt6q1xkg3" path="res://art/Sprites/Backgrounds/Double/background_fade_mushrooms.png" id="1_6444e"]
+[ext_resource type="PackedScene" uid="uid://cmnv3akdkjwpf" path="res://player/player.tscn" id="3_kx6l7"]
+[ext_resource type="PackedScene" uid="uid://dgt3wfndid6qh" path="res://levels/poi.tscn" id="3_n46q3"]
+[ext_resource type="PackedScene" uid="uid://dknk75yjxeelf" path="res://exploration/region.tscn" id="4_3sk1a"]
+[ext_resource type="PackedScene" uid="uid://6lbf6y0p3txv" path="res://items/coin.tscn" id="4_7p6j4"]
+[ext_resource type="PackedScene" uid="uid://dyrcwu6rat1t2" path="res://actors/npc.tscn" id="5_08mmt"]
+[ext_resource type="Script" uid="uid://ctr6cskokbyyq" path="res://quest/explore_quest.gd" id="6_5ot28"]
+[ext_resource type="PackedScene" uid="uid://bbmrxtj5glbm" path="res://items/collectible.tscn" id="6_l53as"]
+[ext_resource type="Resource" uid="uid://108j8rdj8cxx" path="res://items/red_mushroom.tres" id="7_3sk1a"]
+[ext_resource type="Resource" uid="uid://bxieqtwc610e8" path="res://items/brown_mushroom.tres" id="8_l53as"]
+
+[sub_resource type="Resource" id="Resource_aerfg"]
+script = ExtResource("6_5ot28")
+places = Array[String](["UpperRegion", "LowerRegion"])
+name = &"Explore High and Low"
+reward = 100
+metadata/_custom_type_script = "uid://ctr6cskokbyyq"
+
+[node name="Level1" type="Node2D" unique_id=368284176]
+
+[node name="World" type="Node" parent="." unique_id=1577818830]
+
+[node name="Parallax2D" type="Parallax2D" parent="World" unique_id=262759244]
+scroll_scale = Vector2(1.1, 0)
+repeat_size = Vector2(655.872, 0)
+repeat_times = 100
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Parallax2D" unique_id=737645630]
+position = Vector2(328, 328.00003)
+scale = Vector2(1.281, 1.281)
+texture = ExtResource("1_6444e")
+
+[node name="TileMapLayer" parent="World" unique_id=450859637 instance=ExtResource("1_8ffim")]
+tile_map_data = PackedByteArray("AAAAAAEAAwADAAoAAAABAAEAAwAEAAoAAAACAAQAAwALAAkAAAADAAQAAwAGAAoAAAAEAAQAAwAHAAoAAAABAAQAAwAGAAoAABAAAAQAAwAHAAoAABAFAAIAAwARAAkAAAAGAAIAAwAAAAoAAAADAAIAAwAQAAkAAAAEAAIAAwARAAkAAAAFAAUAAwAQAAkAAAAGAAUAAwARAAkAAAAHAAUAAwARAAkAAAAIAAUAAwAAAAoAAAA=")
+
+[node name="POI" parent="World" unique_id=1718234094 instance=ExtResource("3_n46q3")]
+position = Vector2(1072, 576)
+
+[node name="UpperRegion" parent="World" unique_id=973707920 groups=["discoverable"] instance=ExtResource("4_3sk1a")]
+position = Vector2(896, 544)
+
+[node name="LowerRegion" parent="World" unique_id=1767210802 groups=["discoverable"] instance=ExtResource("4_3sk1a")]
+position = Vector2(640, 160)
+
+[node name="Characters" type="Node" parent="." unique_id=724174987]
+
+[node name="Froggy" parent="Characters" unique_id=18894243 instance=ExtResource("5_08mmt")]
+position = Vector2(296, 512)
+quest = SubResource("Resource_aerfg")
+
+[node name="Player" parent="Characters" unique_id=1741144309 instance=ExtResource("3_kx6l7")]
+position = Vector2(128, 80)
+
+[node name="Collectibles" type="Node" parent="." unique_id=2023403431]
+
+[node name="Coin" parent="Collectibles" unique_id=822371725 instance=ExtResource("4_7p6j4")]
+position = Vector2(736, 160)
+
+[node name="Coin2" parent="Collectibles" unique_id=656534780 instance=ExtResource("4_7p6j4")]
+position = Vector2(96, 416)
+
+[node name="Coin3" parent="Collectibles" unique_id=1828022402 instance=ExtResource("4_7p6j4")]
+position = Vector2(1056, 352)
+
+[node name="Collectible" parent="Collectibles" unique_id=1948924455 instance=ExtResource("6_l53as")]
+position = Vector2(832, 608)
+item = ExtResource("7_3sk1a")
+
+[node name="Collectible2" parent="Collectibles" unique_id=931479286 instance=ExtResource("6_l53as")]
+position = Vector2(576, 224)
+item = ExtResource("7_3sk1a")
+
+[node name="Collectible3" parent="Collectibles" unique_id=1032359429 instance=ExtResource("6_l53as")]
+position = Vector2(72, 584)
+item = ExtResource("8_l53as")
+
+[node name="Collectible4" parent="Collectibles" unique_id=992878563 instance=ExtResource("6_l53as")]
+position = Vector2(824, 224)
+item = ExtResource("7_3sk1a")
