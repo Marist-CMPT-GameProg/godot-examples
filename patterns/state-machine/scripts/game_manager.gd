@@ -43,8 +43,8 @@ func load_game() -> void:
 			print("JSON Parse Error!")
 			continue
 		var new_object = load(node_data["filename"]).instantiate()
+		new_object.tree_entered.connect(new_object.load_data.bind(node_data))
 		get_node(node_data["parent"]).add_child(new_object)
-		new_object.load_data(node_data)	
 	get_tree().paused = was_paused
 
 func save_game() -> void:

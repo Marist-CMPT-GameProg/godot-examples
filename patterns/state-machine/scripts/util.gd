@@ -6,4 +6,4 @@ static func str_to_vec2(s:String) -> Vector2:
 	s = s.trim_prefix("(")
 	s = s.trim_suffix(")")
 	var coords = s.split(",")
-	return Vector2(int(coords[0]), int(coords[1]))
+	return Vector2(float(coords[0]), float(coords[1]))

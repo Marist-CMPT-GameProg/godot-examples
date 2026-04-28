@@ -76,6 +76,7 @@ class Exploring extends BeeState:
 			explore()
 		return super._handle_event(event)
 
+
 class Collecting extends BeeState:
 	var target:Node2D
 	func _name() -> StringName: return &"Collecting"

@@ -13,11 +13,15 @@ extends Sprite2D
 	set(new_speed):
 		speed = new_speed
 		step_delay = 1 / speed
+## Initial state of the Bee
+@export var initial_state:BeeState = BeeState.Idling.new(self)
+
 ## Current state of the Bee
-@export var current_state:BeeState = BeeState.Idling.new(self):
+var current_state:BeeState:
 	set(new_state):
 		if not new_state: return # remain in the same state
-		current_state._exit()
+		if current_state:
+			current_state._exit()
 		current_state = new_state
 		new_state._enter()
 
@@ -39,6 +43,7 @@ func _ready() -> void:
 	step_timer.one_shot = true
 	step_timer.timeout.connect(self.step)
 	add_child(step_timer)
+	current_state = initial_state
 
 
 # Called when there is an input event.
@@ -112,9 +117,9 @@ func load_data(data:Dictionary) -> void:
 	self.current_path = data["path"].map(Util.str_to_vec2)
 	self.home = get_tree().root.get_node(data["home"])
 	self.world = get_tree().root.get_node(data["world"])
-	$AStar.graph = self.world # make sure that AStar has a valid graph
-	self.current_state = BeeState.create(data["state"], self)
-	if current_state is BeeState.Exploring:
-		self.current_state.direction = Util.str_to_vec2(data["direction"])
+	self.initial_state = BeeState.create(data["state"], self)
+	if self.initial_state is BeeState.Exploring:
+		self.initial_state.direction = Util.str_to_vec2(data["direction"])
 	elif current_state is BeeState.Collecting:
 		self.current_state.target = get_tree().root.get_node(data["target"])
+	self.tree_entered.disconnect(self.load_data)
